@@ -1,0 +1,137 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://Assets/enemy-sheet.png" type="Texture" id=1]
+[ext_resource path="res://Source/Actors/Enemy.gd" type="Script" id=2]
+[ext_resource path="res://Assets/enemy-dies.png" type="Texture" id=3]
+[ext_resource path="res://Assets/sounds/geleia_hit.wav" type="AudioStream" id=4]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 10, 12 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 10, 0, 10, 12 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 20, 0, 10, 12 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 30, 0, 10, 12 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 40, 0, 10, 12 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 50, 0, 10, 12 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 10, 12 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 3 )
+region = Rect2( 10, 0, 10, 12 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 3 )
+region = Rect2( 20, 0, 10, 12 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 3 )
+region = Rect2( 30, 0, 10, 12 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 3 )
+region = Rect2( 40, 0, 10, 12 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 3 )
+region = Rect2( 50, 0, 10, 12 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 3 )
+region = Rect2( 60, 0, 10, 12 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 3 )
+region = Rect2( 70, 0, 10, 12 )
+
+[sub_resource type="SpriteFrames" id=15]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"loop": true,
+"name": "idle",
+"speed": 3.5
+}, {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "walk",
+"speed": 6.5
+}, {
+"frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
+"loop": false,
+"name": "dead",
+"speed": 8.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=16]
+extents = Vector2( 2.00164, 2.97938 )
+
+[sub_resource type="RectangleShape2D" id=17]
+extents = Vector2( 2.64913, 3.62309 )
+
+[node name="Enemy" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 9
+script = ExtResource( 2 )
+speed = Vector2( 70, 200 )
+tempo_parado = 1.4
+
+[node name="Anima" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -6.01655 )
+frames = SubResource( 15 )
+animation = "dead"
+frame = 7
+playing = true
+
+[node name="enemy_body" type="CollisionShape2D" parent="."]
+modulate = Color( 0.521569, 1, 0, 1 )
+position = Vector2( 0.00158024, -2.99645 )
+shape = SubResource( 16 )
+
+[node name="timer1" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="timer2" type="Timer" parent="."]
+one_shot = true
+
+[node name="hitbox" type="Area2D" parent="."]
+visible = false
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2( 0.0510464, -3.72643 )
+shape = SubResource( 17 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+position = Vector2( 1.90735e-06, -1.53141 )
+scale = Vector2( 0.147516, 0.147516 )
+
+[node name="sounds" type="Node" parent="."]
+
+[node name="sound_get_hit" type="AudioStreamPlayer" parent="sounds"]
+stream = ExtResource( 4 )
+volume_db = -4.039
+pitch_scale = 1.15
+[connection signal="animation_finished" from="Anima" to="." method="_on_Anima_animation_finished"]
+[connection signal="timeout" from="timer1" to="." method="_on_timer1_timeout"]
+[connection signal="timeout" from="timer2" to="." method="_on_timer2_timeout"]
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="screen_entered" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_entered"]

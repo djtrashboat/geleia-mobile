@@ -1,0 +1,11 @@
+[gd_scene format=2]
+
+[node name="cant_do_areas" type="Node2D"]
+
+[node name="cant jump" type="Area2D" parent="."]
+
+[node name="cant left" type="Area2D" parent="."]
+
+[node name="cant attack" type="Area2D" parent="."]
+
+[node name="cant right" type="Area2D" parent="."]

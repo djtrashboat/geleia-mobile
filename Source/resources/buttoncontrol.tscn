@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/UI/control_button.png" type="Texture" id=1]
+[ext_resource path="res://Source/buttoncontrol.gd" type="Script" id=2]
+[ext_resource path="res://Assets/UI/control_button_pressed.png" type="Texture" id=3]
+[ext_resource path="res://Assets/UI/control_button_attack_pressed.png" type="Texture" id=4]
+[ext_resource path="res://Assets/UI/control_button_attack.png" type="Texture" id=5]
+
+[node name="buttoncontrol" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="rightbutton" type="TouchScreenButton" parent="."]
+position = Vector2( 61.615, 172.755 )
+rotation = -6.28319
+scale = Vector2( 1.1, 1.1 )
+normal = ExtResource( 1 )
+pressed = ExtResource( 3 )
+
+[node name="leftbutton" type="TouchScreenButton" parent="."]
+position = Vector2( 51.82, 219.955 )
+rotation = 3.14159
+scale = Vector2( 1.1, 1.1 )
+normal = ExtResource( 1 )
+pressed = ExtResource( 3 )
+
+[node name="upbutton" type="TouchScreenButton" parent="."]
+position = Vector2( 318.176, 219.955 )
+rotation = -1.5708
+scale = Vector2( 1.1, 1.1 )
+normal = ExtResource( 1 )
+pressed = ExtResource( 3 )
+
+[node name="attackbutton" type="TouchScreenButton" parent="."]
+position = Vector2( 379.584, 172.755 )
+scale = Vector2( 1.1, 1.1 )
+normal = ExtResource( 5 )
+pressed = ExtResource( 4 )
+[connection signal="pressed" from="rightbutton" to="." method="_on_rightbutton_pressed"]
+[connection signal="released" from="rightbutton" to="." method="_on_rightbutton_released"]
+[connection signal="pressed" from="leftbutton" to="." method="_on_leftbutton_pressed"]
+[connection signal="released" from="leftbutton" to="." method="_on_leftbutton_released"]
+[connection signal="pressed" from="upbutton" to="." method="_on_upbutton_pressed"]
+[connection signal="released" from="upbutton" to="." method="_on_upbutton_released"]
+[connection signal="pressed" from="attackbutton" to="." method="_on_attackbutton_pressed"]
+[connection signal="released" from="attackbutton" to="." method="_on_attackbutton_released"]
