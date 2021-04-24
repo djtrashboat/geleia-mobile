@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Source/resources/TileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Source/resources/cant_do_areas.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Source/Actors/trap.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/dogica.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://Source/Actors/Enemy.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Source/resources/area-tiles.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 18.6417, 10 )
@@ -29,6 +30,9 @@ extents = Vector2( 189.383, 12.7356 )
 
 [sub_resource type="DynamicFont" id=7]
 font_data = ExtResource( 7 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 10, 14.1972 )
 
 [node name="level1" type="Node2D"]
 script = ExtResource( 5 )
@@ -155,5 +159,48 @@ position = Vector2( 701.286, 175.269 )
 speed = Vector2( 60, 200 )
 tempo_andando = 1.0
 tempo_parado = 1.0
+
+[node name="visible_areas" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="visible_areas"]
+position = Vector2( 31.2112, 161.908 )
+shape = SubResource( 8 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="visible_areas"]
+position = Vector2( 441.834, 161.908 )
+shape = SubResource( 8 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="visible_areas"]
+position = Vector2( 874.815, 161.908 )
+shape = SubResource( 8 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="visible_areas"]
+position = Vector2( 1306.58, 161.908 )
+shape = SubResource( 8 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="visible_areas"]
+position = Vector2( 1735.26, 161.908 )
+shape = SubResource( 8 )
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="visible_areas"]
+position = Vector2( 2170.12, 161.908 )
+shape = SubResource( 8 )
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="visible_areas"]
+position = Vector2( 2601.62, 161.908 )
+shape = SubResource( 8 )
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="visible_areas"]
+position = Vector2( 3033.39, 161.908 )
+shape = SubResource( 8 )
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="visible_areas"]
+position = Vector2( 3467.31, 161.908 )
+shape = SubResource( 8 )
+
+[node name="area-tiles" parent="." instance=ExtResource( 9 )]
+tile_data = PoolIntArray( 196665, 6, 0, 196666, 6, 0, 196667, 7, 0, 196668, 6, 0, 196669, 6, 0, 196670, 6, 0, 196671, 7, 0, 196672, 6, 0, 196673, 6, 0, 196674, 6, 0, 196675, 7, 0, 196676, 6, 0, 196677, 6, 0, 196678, 6, 0, 196679, 7, 0, 196680, 6, 0, 196681, 6, 0, 196682, 6, 0, 196683, 7, 0, 196684, 6, 0, 196685, 6, 0, 196686, 6, 0, 196687, 6, 0, 327740, 6, 0, 327741, 7, 0, 393276, 6, 0, 393277, 7, 0, 458812, 6, 0, 458813, 7, 0, 524348, 6, 0, 524349, 7, 0, 589884, 6, 0, 589885, 7, 0, 655365, 1, 0, 655366, 0, 0, 655369, 1, 0, 655370, 0, 0, 655372, 0, 0, 655373, 0, 0, 655374, 3, 0, 655375, 0, 0, 655376, 0, 0, 655377, 0, 0, 655378, 0, 0, 655379, 0, 0, 655380, 3, 0, 655381, 0, 0, 655382, 0, 0, 655383, 0, 0, 655401, 0, 0, 655402, 0, 0, 655403, 4, 0, 655404, 0, 0, 655405, 0, 0, 655406, 0, 0, 655420, 6, 0, 655421, 7, 0 )
+[connection signal="body_entered" from="visible_areas" to="." method="_on_visible_areas_body_entered"]
+[connection signal="body_exited" from="visible_areas" to="." method="_on_visible_areas_body_exited"]
 
 [editable path="cant_do_areas"]

@@ -47,3 +47,13 @@ func _process(delta: float) -> void:
 		print("acabou o tempo")
 		set_process(false)
 		get_tree().change_scene(LevelMenu)
+
+
+func _on_visible_areas_body_exited(body: Node) -> void:
+	if body.name == "Player":
+		get_node("area-tiles").hide()
+
+
+func _on_visible_areas_body_entered(body: Node) -> void:
+	if body.name == "Player":
+		get_node("area-tiles").show()
